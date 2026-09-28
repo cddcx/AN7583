@@ -138,11 +138,11 @@ jobs:
         rm -rf packages
         rm -rf feeds.buildinfo
         rm -rf version.buildinfo
-        rm -rf *kernel.bin
+        #rm -rf *kernel.bin
         rm -rf profiles.json
-        rm -rf *rootfs.img
-        rm -rf *rootfs.tar.gz
-        rm -rf *-bl2.bin
+        #rm -rf *rootfs.img
+        #rm -rf *rootfs.tar.gz
+        #rm -rf *-bl2.bin
         rm -rf *.manifest
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "status=success" >> $GITHUB_OUTPUT
