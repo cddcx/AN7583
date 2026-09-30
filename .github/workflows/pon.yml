@@ -6,10 +6,10 @@ on:
     inputs:
       URL:
         description: '选择源码：'
-        default: 'openwrt'
+        default: 'ponwrt'
         required: true
         type: choice
-        options: [ openwrt,  immortalwrt ]
+        options: [ ponwrt, immortalwrt ]
         
       config_s:
         description: '选择config配置文件'
@@ -19,7 +19,6 @@ on:
         options: [ an7581.config, an7583.config, hg5382a.config ]
 
 env:
-  REPO_URL: https://github.com/pbs05/ponwrt
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
   FILES: files
@@ -81,7 +80,17 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
-        git clone $REPO_URL -b $REPO_BRANCH openwrt
+        # 设置编译源代码
+          if [[ "${{github.event.inputs.URL}}" == *"openwrt"* ]]; then
+              REPO_URL="https://github.com/pbs05/ponwrt"
+          elif [[ "${{github.event.inputs.URL}}" == *"immortalwrt"* ]]; then
+              REPO_URL="https://github.com/immortalwrt/immortalwrt"
+          else
+              echo "源代码仓库的地址无法被识别或无法访问."
+              exit 1
+          fi
+        # 克隆源代码
+        git clone $REPO_URL -b ${{env.REPO_BRANCH}} openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
     - name: DIY1(一般用于安装依赖和插件)
