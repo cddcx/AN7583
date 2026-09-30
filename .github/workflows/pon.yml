@@ -18,10 +18,10 @@ on:
     inputs:
       config_s:
         description: '选择config配置文件'
-        default: 'an7581.config'
+        default: 'hg5382a.config'
         required: true
         type: choice
-        options: [ an7581.config, an7583.config ]
+        options: [ an7581.config, an7583.config, hg5382a.config ]
 
 env:
   REPO_URL: https://github.com/pbs05/ponwrt
