@@ -15,13 +15,19 @@ name: ponwrt
 on:
   repository_dispatch:
   workflow_dispatch:
+    inputs:
+      config_s:
+        description: '选择config配置文件'
+        default: 'an7581.config'
+        required: true
+        type: choice
+        options: [ an7581.config, an7583.config ]
 
 env:
   REPO_URL: https://github.com/pbs05/ponwrt
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
   FILES: files
-  CONFIG_FILE: configs/an7583.config
   DIY_P1_SH: diy1.sh
   DIY_P2_SH: diy2.sh
   UPLOAD_BIN_DIR: false
@@ -32,6 +38,10 @@ env:
 jobs:
   build:
     runs-on: ubuntu-24.04
+
+    name: 选择编译
+    env:
+      CONFIG_FILE: configs/${{github.event.inputs.config_s}}
 
     steps:
     - name: 准备完成
