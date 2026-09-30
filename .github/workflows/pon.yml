@@ -88,7 +88,7 @@ jobs:
       run: |
         df -hT $PWD
         # 设置编译源代码
-          if [[ "${{github.event.inputs.URL}}" == *"openwrt"* ]]; then
+          if [[ "${{github.event.inputs.URL}}" == *"ponwrt"* ]]; then
               REPO_URL="https://github.com/pbs05/ponwrt"
           elif [[ "${{github.event.inputs.URL}}" == *"immortalwrt"* ]]; then
               REPO_URL="https://github.com/immortalwrt/immortalwrt"
